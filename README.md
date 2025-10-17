@@ -120,10 +120,5 @@ This project is licensed under the MIT License.
 - Uses SentencePiece for efficient tokenization
 - Streamlit for interactive web interface
 
-## 📞 Contact
-
-For questions or issues, please open a GitHub issue or contact the maintainer.
-
----
 
 **Made with ❤️ for the Urdu language community**
