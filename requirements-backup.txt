@@ -1,0 +1,8 @@
+# Ultra-minimal requirements for Streamlit Cloud
+# Use this if standard requirements still fail
+
+streamlit
+torch
+numpy
+matplotlib
+sentencepiece
