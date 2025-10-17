@@ -1,0 +1,28 @@
+[server]
+headless = true
+port = $PORT
+enableCORS = false
+enableXsrfProtection = false
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+primaryColor = "#667eea"
+backgroundColor = "#1e3c72"
+secondaryBackgroundColor = "#2a5298"
+textColor = "#ffffff"
+font = "sans serif"
+
+[runner]
+magicEnabled = true
+installTracer = false
+fixMatplotlib = true
+
+[client]
+caching = true
+displayEnabled = true
+
+[global]
+maxUploadSize = 100
+developmentMode = false

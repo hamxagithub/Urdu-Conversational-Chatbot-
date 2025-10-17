@@ -1,0 +1,12 @@
+streamlit
+torch --index-url https://download.pytorch.org/whl/cpu  
+numpy
+pandas
+matplotlib
+seaborn
+sentencepiece
+plotly
+tqdm
+requests
+Pillow
+scipy

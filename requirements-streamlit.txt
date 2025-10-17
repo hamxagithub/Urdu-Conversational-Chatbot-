@@ -1,0 +1,26 @@
+# Streamlit Cloud Optimized Requirements
+streamlit>=1.28.0
+
+# Core ML Dependencies (CPU-optimized for cloud)
+torch>=2.0.0,<2.1.0 --index-url https://download.pytorch.org/whl/cpu
+torchvision>=0.15.0,<0.16.0 --index-url https://download.pytorch.org/whl/cpu
+
+# Essential Dependencies
+numpy>=1.24.0,<1.26.0
+pandas>=2.0.0,<2.1.0
+matplotlib>=3.7.0,<3.8.0
+seaborn>=0.12.0,<0.13.0
+
+# Text Processing
+sentencepiece>=0.1.99,<0.2.0
+
+# Visualization
+plotly>=5.15.0,<6.0.0
+
+# Utilities
+tqdm>=4.65.0
+requests>=2.31.0
+Pillow>=10.0.0
+
+# Performance (lightweight versions)
+scipy>=1.11.0,<1.12.0
