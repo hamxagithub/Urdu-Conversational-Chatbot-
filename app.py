@@ -17,10 +17,42 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better Urdu text rendering and UI
+# Custom CSS for beautiful Urdu text rendering and modern UI
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Main app background with subtle gradient */
+    .main .block-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background-attachment: fixed;
+        min-height: 100vh;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    /* Content background with glassmorphism effect */
+    .element-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin: 0.5rem 0;
+        transition: all 0.3s ease;
+    }
+    
+    .element-container:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Sidebar styling */
+    .css-1d391kg {
+        background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
     
     .urdu-text {
         font-family: 'Noto Nastaliq Urdu', serif;
@@ -28,68 +60,153 @@ st.markdown("""
         text-align: right;
         font-size: 18px;
         line-height: 1.8;
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
     
     .chat-message {
-        padding: 1.2rem;
-        border-radius: 15px;
-        margin: 0.8rem 0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        animation: fadeIn 0.5s ease-in;
+        padding: 1.5rem;
+        border-radius: 20px;
+        margin: 1rem 0;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        animation: slideIn 0.6s ease-out;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .chat-message::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        border-radius: 20px;
+        pointer-events: none;
     }
     
     .user-message {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         color: white;
-        margin-left: 15%;
-        border-bottom-right-radius: 5px;
+        margin-left: 10%;
+        border-bottom-right-radius: 8px;
+        box-shadow: 0 8px 32px rgba(79, 172, 254, 0.3);
     }
     
     .bot-message {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        color: white;
-        margin-right: 15%;
-        border-bottom-left-radius: 5px;
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        color: #1a202c;
+        margin-right: 10%;
+        border-bottom-left-radius: 8px;
+        box-shadow: 0 8px 32px rgba(67, 233, 123, 0.3);
+        font-weight: 500;
     }
     
     .title-urdu {
         font-family: 'Noto Nastaliq Urdu', serif;
-        font-size: 3rem;
+        font-size: 3.5rem;
         text-align: center;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
         font-weight: 700;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
     }
     
     .sidebar-urdu {
         font-family: 'Noto Nastaliq Urdu', serif;
         direction: rtl;
         text-align: right;
+        color: #e2e8f0;
     }
     
+    /* Input styling with modern design */
     .stTextInput > div > div > input {
         font-family: 'Noto Nastaliq Urdu', serif;
         direction: rtl;
         text-align: right;
         font-size: 16px;
-        border-radius: 25px;
-        border: 2px solid #667eea;
-        padding: 12px 20px;
+        border-radius: 30px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 15px 25px;
+        color: white;
+        transition: all 0.3s ease;
     }
     
     .stTextInput > div > div > input:focus {
-        border-color: #764ba2;
-        box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        border: 2px solid #4facfe;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 20px rgba(79, 172, 254, 0.4);
+        outline: none;
     }
     
-    .metric-container {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        padding: 1.2rem;
+    .stTextInput > div > div > input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+        font-family: 'Noto Nastaliq Urdu', serif;
+    }
+    
+    /* Button styling */
+    .stButton > button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+    
+    /* Selectbox styling */
+    .stSelectbox > div > div {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 15px;
-        margin: 0.8rem 0;
-        border-left: 4px solid #667eea;
+        color: white;
+    }
+    
+    /* Metric containers with modern cards */
+    .metric-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        padding: 1.5rem;
+        border-radius: 20px;
+        margin: 1rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .metric-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Animations */
+    @keyframes slideIn {
+        from { 
+            opacity: 0; 
+            transform: translateX(30px);
+        }
+        to { 
+            opacity: 1; 
+            transform: translateX(0);
+        }
     }
     
     @keyframes fadeIn {
@@ -97,23 +214,87 @@ st.markdown("""
         to { opacity: 1; transform: translateY(0); }
     }
     
+    /* Status indicators with modern design */
     .status-indicator {
         display: inline-block;
-        width: 10px;
-        height: 10px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
-        margin-right: 8px;
+        margin-right: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
     
     .status-online {
-        background-color: #4CAF50;
+        background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
         animation: pulse 2s infinite;
     }
     
+    .status-loading {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        animation: pulse 1.5s infinite;
+    }
+    
     @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
-        70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        0% { 
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            transform: scale(1);
+        }
+        70% { 
+            box-shadow: 0 0 0 15px rgba(34, 197, 94, 0);
+            transform: scale(1.1);
+        }
+        100% { 
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            transform: scale(1);
+        }
+    }
+    
+    /* Typography improvements */
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+        color: white;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Loading spinner */
+    .loading-spinner {
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid #4facfe;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 10px auto;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    /* Hide Streamlit branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -1011,61 +1192,109 @@ def display_chat_message(message, is_user=True):
         """, unsafe_allow_html=True)
 
 def main():
-    """Main application"""
+    """Main application with beautiful UI"""
     initialize_session_state()
     
-    # Title
-    st.markdown('<h1 class="title-urdu">🤖 اردو چیٹ بوٹ</h1>', unsafe_allow_html=True)
-    st.markdown('<h2 style="text-align: center; color: #666; margin-bottom: 2rem;">Urdu Transformer Chatbot</h2>', 
-                unsafe_allow_html=True)
+    # Enhanced Header with beautiful styling
+    st.markdown("""
+    <div style="text-align: center; margin-bottom: 3rem;">
+        <h1 class="title-urdu">🤖 اردو چیٹ بوٹ</h1>
+        <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; font-weight: 300; margin-top: -1rem;">
+            Advanced Transformer-based Urdu Conversational AI
+        </p>
+        <div style="width: 100px; height: 3px; background: linear-gradient(90deg, #4facfe, #00f2fe); margin: 1rem auto; border-radius: 2px;"></div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    # Load model
-    with st.spinner("🔄 Loading Urdu Transformer Model from files..."):
+    # Load model with enhanced loading animation
+    model_loaded = False
+    with st.spinner("🔄 Loading Urdu Transformer Model..."):
         model, tokenizer, device, PAD_ID, BOS_ID, EOS_ID = load_model_and_tokenizer()
     
     # Define UNK_ID constant
     UNK_ID = 3
     
     if model is None:
-        st.error("❌ Failed to load the chatbot model. Please check if all model files are present in the files/ folder.")
-        st.info("Required files: best_model.pth (or best_model.pkl), tokenizer.model, tokenizer.vocab, vocab_mapping.pkl")
+        st.markdown("""
+        <div style="background: rgba(244, 67, 54, 0.1); padding: 2rem; border-radius: 20px; border: 1px solid rgba(244, 67, 54, 0.3); margin: 2rem 0;">
+            <h3 style="color: #f44336; margin-bottom: 1rem;">❌ Model Loading Failed</h3>
+            <p style="color: rgba(255,255,255,0.8); line-height: 1.6;">
+                Could not load the chatbot model. Please ensure all required files are present in the <code>files/</code> folder:
+            </p>
+            <ul style="color: rgba(255,255,255,0.7); margin: 1rem 0;">
+                <li>✅ best_model.pth (or best_model.pkl)</li>
+                <li>✅ tokenizer.model</li>
+                <li>✅ tokenizer.vocab</li>
+                <li>✅ vocab_mapping.pkl</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
         return
+    else:
+        model_loaded = True
     
-    # Success indicator
-    st.success("✅ Model loaded successfully! Ready to chat in Urdu.")
-    
-    # Sidebar
-    with st.sidebar:
-        st.markdown(f"""
-        <div style="text-align: center; margin-bottom: 1rem;">
+    # Success indicator with animation
+    if model_loaded:
+        st.markdown("""
+        <div style="background: rgba(76, 175, 80, 0.1); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.3); margin: 1rem 0; text-align: center;">
             <span class="status-indicator status-online"></span>
-            <strong>Model Status: Online</strong>
+            <strong style="color: #4caf50; font-size: 1.1rem;">Model loaded successfully! Ready to chat in Urdu 🚀</strong>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Enhanced Sidebar
+    with st.sidebar:
+        st.markdown("""
+        <div style="text-align: center; margin-bottom: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 15px;">
+            <span class="status-indicator status-online"></span>
+            <strong style="color: #4caf50; font-size: 1.1rem;">Model Online</strong>
+            <br><small style="color: rgba(255,255,255,0.7);">Ready to assist you</small>
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown('<h2 class="sidebar-urdu">🔧 معلومات</h2>', unsafe_allow_html=True)
+        st.markdown('<h2 class="sidebar-urdu">⚙️ تفصیلات</h2>', unsafe_allow_html=True)
         
-        # Model info
+        # Enhanced Model info with modern cards
         vocab_size = tokenizer.vocab_size()
         total_params = sum(p.numel() for p in model.parameters())
         
         st.markdown(f"""
         <div class="metric-container">
-            <h4>🤖 Model Information</h4>
-            <ul>
-                <li><strong>Architecture:</strong> Transformer Encoder-Decoder</li>
-                <li><strong>Parameters:</strong> {total_params:,}</li>
-                <li><strong>Vocab Size:</strong> {vocab_size:,}</li>
-                <li><strong>Embedding Dim:</strong> 256</li>
-                <li><strong>Attention Heads:</strong> 2</li>
-                <li><strong>Encoder Layers:</strong> 2</li>
-                <li><strong>Decoder Layers:</strong> 2</li>
-                <li><strong>Device:</strong> {'GPU' if torch.cuda.is_available() else 'CPU'}</li>
-            </ul>
+            <h3 style="color: #4facfe; margin-bottom: 1rem;">🤖 Model Architecture</h3>
+            <div style="display: grid; gap: 0.5rem;">
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: rgba(255,255,255,0.8);">Type:</span>
+                    <strong style="color: white;">Transformer</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: rgba(255,255,255,0.8);">Parameters:</span>
+                    <strong style="color: #43e97b;">{total_params:,}</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: rgba(255,255,255,0.8);">Vocabulary:</span>
+                    <strong style="color: #4facfe;">{vocab_size:,}</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: rgba(255,255,255,0.8);">Dimensions:</span>
+                    <strong style="color: white;">256</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: rgba(255,255,255,0.8);">Attention Heads:</span>
+                    <strong style="color: white;">2</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: rgba(255,255,255,0.8);">Layers:</span>
+                    <strong style="color: white;">2+2</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: rgba(255,255,255,0.8);">Device:</span>
+                    <strong style="color: {'#43e97b' if torch.cuda.is_available() else '#fbbf24'};">{'🚀 GPU' if torch.cuda.is_available() else '💻 CPU'}</strong>
+                </div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # Statistics
+        # Enhanced Statistics with beautiful design
         st.markdown(f"""
         <div class="metric-container">
             <h4>📊 Chat Statistics</h4>
