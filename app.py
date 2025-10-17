@@ -27,11 +27,9 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
     
-    /* Animated gradient background with fixed styling */
+    /* Permanent Black Background - Fixed */
     .stApp, .main, .main .block-container {
-        background: linear-gradient(-45deg, #1e3c72, #2a5298, #667eea, #764ba2, #f093fb, #f5576c) !important;
-        background-size: 400% 400% !important;
-        animation: gradientShift 20s ease infinite !important;
+        background: #000000 !important;
         min-height: 100vh !important;
         padding: 1.5rem !important;
         position: relative !important;
@@ -39,7 +37,7 @@ st.markdown("""
     
     /* Override Streamlit's default white backgrounds */
     .stApp > header, .stApp > .main, .stApp {
-        background: transparent !important;
+        background: #000000 !important;
     }
     
     .main .block-container::before {
@@ -49,20 +47,12 @@ st.markdown("""
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                    radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.3) 0%, transparent 50%);
+        background: #000000 !important;
         pointer-events: none;
         z-index: -1;
     }
     
-    @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        25% { background-position: 100% 50%; }
-        50% { background-position: 100% 100%; }
-        75% { background-position: 0% 100%; }
-        100% { background-position: 0% 50%; }
-    }
+    /* Removed gradient animation - using permanent black background */
     
     /* Enhanced glassmorphism containers */
     .element-container, .stContainer, .main > div {
@@ -102,12 +92,9 @@ st.markdown("""
         border-color: rgba(255, 255, 255, 0.3) !important;
     }
     
-    /* Enhanced sidebar with proper contrast */
+    /* Enhanced sidebar with black background */
     .css-1d391kg, .stSidebar, .stSidebar > div {
-        background: linear-gradient(180deg, 
-            rgba(0, 0, 0, 0.8) 0%, 
-            rgba(30, 41, 59, 0.85) 50%, 
-            rgba(15, 23, 42, 0.9) 100%) !important;
+        background: rgba(0, 0, 0, 0.9) !important;
         backdrop-filter: blur(30px) !important;
         border-right: 3px solid rgba(102, 126, 234, 0.5) !important;
         box-shadow: 8px 0 30px rgba(0, 0, 0, 0.3) !important;
@@ -605,7 +592,7 @@ st.markdown("""
     }
     
     .attention-heatmap {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+        background: rgba(0, 0, 0, 0.85) !important;
         border-radius: 25px !important;
         padding: 2.5rem !important;
         margin: 2rem 0 !important;
@@ -749,6 +736,32 @@ st.markdown("""
     .streamlit-expanderContent {
         background: rgba(255, 255, 255, 0.05) !important;
         border-radius: 0 0 10px 10px !important;
+    }
+    
+    /* COMPREHENSIVE BLACK BACKGROUND OVERRIDE - FORCE ALL BACKGROUNDS TO BLACK */
+    * {
+        background-color: transparent !important;
+    }
+    
+    body, html, .stApp, .stApp > div, .main, .block-container, 
+    div[data-testid="stAppViewContainer"], div[data-testid="stHeader"], 
+    div[data-testid="stToolbar"], section[data-testid="stSidebar"],
+    .css-1d391kg, .stSidebar, .stMainBlockContainer {
+        background: #000000 !important;
+        background-color: #000000 !important;
+    }
+    
+    /* Force any white or light backgrounds to black */
+    div[style*="background"], div[style*="background-color"], 
+    .stContainer, .element-container {
+        background: rgba(0, 0, 0, 0.7) !important;
+        background-color: rgba(0, 0, 0, 0.7) !important;
+    }
+    
+    /* Ensure plotly charts also have black backgrounds */
+    .plotly, .plotly .bg, .plotly .plot-container {
+        background: #000000 !important;
+        background-color: #000000 !important;
     }
 </style>
 """, unsafe_allow_html=True)
