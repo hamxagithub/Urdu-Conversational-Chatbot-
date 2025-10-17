@@ -1,0 +1,17 @@
+# No-PyTorch Alternative for Maximum Compatibility
+# Uses TensorFlow Lite and simple NLP
+
+streamlit>=1.28.0
+numpy>=1.25.0
+pandas>=2.1.0
+matplotlib>=3.8.0
+
+# TensorFlow Lite instead of PyTorch
+tensorflow-lite>=2.15.0
+
+# Text processing
+sentencepiece>=0.1.99
+transformers>=4.36.0
+
+# Simple utilities
+requests>=2.31.0

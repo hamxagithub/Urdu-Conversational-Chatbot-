@@ -1,0 +1,8 @@
+# Ultra-Minimal Python 3.13 Compatible Requirements
+# Optimized for Streamlit Cloud deployment
+
+streamlit
+numpy
+matplotlib
+torch
+sentencepiece
