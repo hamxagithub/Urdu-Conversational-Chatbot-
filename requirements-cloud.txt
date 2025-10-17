@@ -1,18 +1,17 @@
-# Streamlit Cloud Deployment Requirements
-# Optimized for cloud deployment with CPU-only PyTorch
+# Ultra-minimal requirements for Streamlit Cloud
+# Compatible with Python 3.13
 
-# Core Dependencies
-torch==2.0.1+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
-torchvision==0.15.2+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
+# Core Dependencies - Python 3.13 compatible versions
+torch==2.5.0
+torchvision==0.20.0
 
 # Streamlit
 streamlit==1.28.1
 
 # Essential packages
 sentencepiece==0.1.99
-numpy==1.24.3
-pandas==2.0.3
-matplotlib==3.7.2
+numpy==1.24.4
+matplotlib==3.8.0
 seaborn==0.12.2
 tqdm==4.65.0
 pathlib2==2.3.7
